@@ -349,7 +349,7 @@ const Reports = () => {
     ) || { amount: 0, discount: 0, dppFaktur: 0, ppn11: 0 };
 
     const receiptContent = `
-      <div style="font-family: Arial, sans-serif; max-width: 800px; width: 100%; margin: 0 auto; padding: 20px; min-height: 600px;">
+      <div style="font-family: 'HSD Display', 'DRAFT', 'Roman', 'Helvetica Neue', 'Arial', sans-serif; max-width: 800px; width: 100%; margin: 0 auto; padding: 20px; min-height: 600px;">
         <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #000; padding-bottom: 8px; margin-bottom: 12px;">
           <div style="flex: 1;">
             <div style="display: flex; align-items: center; gap: 20px;">
@@ -471,7 +471,9 @@ const Reports = () => {
         <html>
           <head>
             <title>Invoice - ${sale.sale_number}</title>
+            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
             <style>
+              @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
               @page { 
                 size: A4 landscape; 
                 margin: 15mm; 
@@ -480,6 +482,7 @@ const Reports = () => {
                 body { 
                   margin: 0; 
                   font-size: 12px; 
+                  font-family: 'HSD Display', 'DRAFT', 'Roman', 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
                 }
               }
             </style>
