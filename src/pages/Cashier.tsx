@@ -365,40 +365,40 @@ const Cashier = () => {
     );
 
     const receiptContent = `
-      <div style="font-family: 'HSD Display', 'DRAFT', 'Roman', 'Helvetica Neue', 'Arial', sans-serif; max-width: 800px; width: 100%; margin: 0 auto; padding: 20px; min-height: 600px;">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #000; padding-bottom: 8px; margin-bottom: 12px;">
+      <div style="font-family: 'HSD Display', 'DRAFT', 'Roman', 'Helvetica Neue', 'Arial', sans-serif; max-width: 100%; width: 100%; margin: 0 auto; padding: 12px; min-height: auto;">
+        <div class="invoice-header" style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #000; padding-bottom: 6px; margin-bottom: 8px;">
           <div style="flex: 1;">
             <div style="display: flex; align-items: center; gap: 20px;">
-              ${logoUrl ? `<img src="${logoUrl}" alt="Logo" style="max-height: 80px;" />` : ""}
+              ${logoUrl ? `<img src="${logoUrl}" alt="Logo" style="max-height: 60px;" />` : ""}
             </div>
           </div>
           <div style="text-align: right;">
-            <h2 style="margin: 0; font-size: 32px; font-weight: bold;">INVOICE</h2>
-            <div style="margin-top: 15px;">
-              ${storeName ? `<p style="margin: 5px 0; font-size: 16px;">${storeName}</p>` : ""}
-              ${storeAddress ? `<p style="margin: 5px 0; font-size: 14px;">${storeAddress}</p>` : ""}
-              ${storePhone ? `<p style="margin: 5px 0; font-size: 14px;">${storePhone}</p>` : ""}
-              ${storeEmail ? `<p style="margin: 5px 0; font-size: 14px;">${storeEmail}</p>` : ""}
-              ${storeWebsite ? `<p style="margin: 5px 0; font-size: 14px;">${storeWebsite}</p>` : ""}
+            <h2 style="margin: 0; font-size: 28px; font-weight: bold;">INVOICE</h2>
+            <div style="margin-top: 10px;">
+              ${storeName ? `<p style="margin: 3px 0; font-size: 14px;">${storeName}</p>` : ""}
+              ${storeAddress ? `<p style="margin: 3px 0; font-size: 12px;">${storeAddress}</p>` : ""}
+              ${storePhone ? `<p style="margin: 3px 0; font-size: 12px;">${storePhone}</p>` : ""}
+              ${storeEmail ? `<p style="margin: 3px 0; font-size: 12px;">${storeEmail}</p>` : ""}
+              ${storeWebsite ? `<p style="margin: 3px 0; font-size: 12px;">${storeWebsite}</p>` : ""}
             </div>
           </div>
         </div>
 
-        <div style="margin-bottom: 20px;">
-          <p style="margin: 5px 0; font-size: 16px;"><strong>NO INVOICE:</strong> ${sale.sale_number}</p>
-          <p style="margin: 5px 0; font-size: 16px;"><strong>TANGGAL:</strong> ${new Date(sale.created_at).toLocaleDateString("id-ID")}</p>
-          ${sale.customer_name ? `<p style="margin: 5px 0; font-size: 16px;"><strong>KEPADA:</strong> ${sale.customer_name}</p>` : ""}
-          <p style="margin: 5px 0; font-size: 16px;"><strong>KASIR:</strong> ${cashierName}</p>
+        <div class="invoice-details" style="margin-bottom: 15px;">
+          <p style="margin: 3px 0; font-size: 14px;"><strong>NO INVOICE:</strong> ${sale.sale_number}</p>
+          <p style="margin: 3px 0; font-size: 14px;"><strong>TANGGAL:</strong> ${new Date(sale.created_at).toLocaleDateString("id-ID")}</p>
+          ${sale.customer_name ? `<p style="margin: 3px 0; font-size: 14px;"><strong>KEPADA:</strong> ${sale.customer_name}</p>` : ""}
+          <p style="margin: 3px 0; font-size: 14px;"><strong>KASIR:</strong> ${cashierName}</p>
         </div>
 
-        <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px; font-size: 14px;">
+        <table class="invoice-table" style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 12px;">
           <thead>
             <tr style="background-color: #f8f9fa; border-bottom: 2px solid #000;">
-              <th style="text-align: left; padding: 12px; font-size: 16px; font-weight: bold;">KETERANGAN</th>
-              <th style="text-align: center; padding: 12px; font-size: 16px; font-weight: bold;">QTY</th>
-              <th style="text-align: right; padding: 12px; font-size: 16px; font-weight: bold;">HARGA</th>
-              <th style="text-align: right; padding: 12px; font-size: 16px; font-weight: bold;">DISCOUNT</th>
-              <th style="text-align: right; padding: 12px; font-size: 16px; font-weight: bold;">TOTAL</th>
+              <th style="text-align: left; padding: 8px; font-size: 12px; font-weight: bold;">KETERANGAN</th>
+              <th style="text-align: center; padding: 8px; font-size: 12px; font-weight: bold;">QTY</th>
+              <th style="text-align: right; padding: 8px; font-size: 12px; font-weight: bold;">HARGA</th>
+              <th style="text-align: right; padding: 8px; font-size: 12px; font-weight: bold;">DISCOUNT</th>
+              <th style="text-align: right; padding: 8px; font-size: 12px; font-weight: bold;">TOTAL</th>
             </tr>
           </thead>
           <tbody>
@@ -408,14 +408,14 @@ const Cashier = () => {
                   const itemCalc = calculateDetailedPricing(item);
                   return `
               <tr style="border-bottom: 1px solid #ddd;">
-                <td style="padding: 10px; font-size: 14px;">${item.product.name}</td>
-                <td style="text-align: center; padding: 10px; font-size: 14px;">${item.quantity}</td>
-                <td style="text-align: right; padding: 10px; font-size: 14px;">${formatCurrency(Number(item.product.price))}</td>
-                <td style="text-align: right; padding: 10px; font-size: 14px;">
+                <td style="padding: 6px; font-size: 11px;">${item.product.name}</td>
+                <td style="text-align: center; padding: 6px; font-size: 11px;">${item.quantity}</td>
+                <td style="text-align: right; padding: 6px; font-size: 11px;">${formatCurrency(Number(item.product.price))}</td>
+                <td style="text-align: right; padding: 6px; font-size: 11px;">
                   ${item.customDiscount > 0 ? `${item.customDiscount}%` : '-'}
-                  ${item.customDiscount > 0 ? `<br/><small style="color: #666;">-${formatCurrency(itemCalc.discount)}</small>` : ''}
+                  ${item.customDiscount > 0 ? `<br/><small style="color: #666; font-size: 9px;">-${formatCurrency(itemCalc.discount)}</small>` : ''}
                 </td>
-                <td style="text-align: right; padding: 10px; font-size: 14px;">${formatCurrency(itemCalc.finalItemTotal)}</td>
+                <td style="text-align: right; padding: 6px; font-size: 11px;">${formatCurrency(itemCalc.finalItemTotal)}</td>
               </tr>
             `;
                 }
@@ -424,22 +424,22 @@ const Cashier = () => {
           </tbody>
         </table>
 
-        <div style="display: flex; justify-content: space-between; margin-top: 30px;">
-          <div style="flex: 1; max-width: 300px;">
-            <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-              <h4 style="margin: 0 0 10px 0; color: #d9534f;">CATATAN PEMBAYARAN:</h4>
-              <p style="margin: 0; font-size: 12px; line-height: 1.4;">
+        <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+          <div style="flex: 1; max-width: 250px;">
+            <div style="background-color: #f8f9fa; padding: 10px; border-radius: 6px; margin-bottom: 15px;">
+              <h4 style="margin: 0 0 8px 0; color: #d9534f; font-size: 12px;">CATATAN PEMBAYARAN:</h4>
+              <p style="margin: 0; font-size: 10px; line-height: 1.3;">
                 ${settings?.payment_note_line1 || `Harga BCA : ${formatCurrency(Math.round(detailedTotals.dppFaktur / cart.length))}/PUTRA INDRAWAN`}<br/>
                 ${settings?.payment_note_line2 || "No. Rekening: 7840656905"}
               </p>
             </div>
           </div>
 
-          <div style="min-width: 300px; border-left: 2px solid #000; padding-left: 20px;">
+          <div style="min-width: 200px; border-left: 2px solid #000; padding-left: 15px;">
             ${
               receiptConfig.showAmount
                 ? `
-            <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 12px;">
               <span>SUB TOTAL:</span>
               <span>${formatCurrency(detailedTotals.amount)}</span>
             </div>
@@ -449,7 +449,7 @@ const Cashier = () => {
             ${
               detailedTotals.discount > 0
                 ? `
-            <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 12px;">
               <span>Total Discount:</span>
               <span>-${formatCurrency(detailedTotals.discount)}</span>
             </div>
@@ -459,7 +459,7 @@ const Cashier = () => {
             ${
               receiptConfig.showDppFaktur
                 ? `
-            <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 12px;">
               <span>DPP Faktur:</span>
               <span>${formatCurrency(detailedTotals.dppFaktur)}</span>
             </div>
@@ -469,15 +469,15 @@ const Cashier = () => {
             ${
               receiptConfig.showPpn11
                 ? `
-            <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 12px;">
               <span>PPN 11%:</span>
               <span>${formatCurrency(detailedTotals.ppn11)}</span>
             </div>
             `
                 : ""
             }
-            <div style="border-top: 1px solid #000; margin: 15px 0; padding-top: 15px;">
-              <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-weight: bold; font-size: 18px;">
+            <div style="border-top: 1px solid #000; margin: 10px 0; padding-top: 10px;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: bold; font-size: 14px;">
                 <span>TOTAL:</span>
                 <span>${formatCurrency(total)}</span>
               </div>
@@ -485,16 +485,16 @@ const Cashier = () => {
           </div>
         </div>
 
-        <div style="margin-top: 40px; text-align: right;">
-          <p style="margin: 0; font-size: 16px; font-weight: bold;"></p>
+        <div style="margin-top: 25px; text-align: right;">
+          <p style="margin: 0; font-size: 12px; font-weight: bold;"></p>
         </div>
 
         ${
           receiptHeader || receiptFooter
             ? `
-        <div style="text-align: center; margin-top: 30px; border-top: 1px solid #000; padding-top: 15px;">
-          ${receiptHeader ? `<p style="font-size: 14px; margin: 5px 0;">${receiptHeader}</p>` : ""}
-          ${receiptFooter ? `<p style="font-size: 14px; margin: 5px 0;">${receiptFooter}</p>` : ""}
+        <div style="text-align: center; margin-top: 20px; border-top: 1px solid #000; padding-top: 10px;">
+          ${receiptHeader ? `<p style="font-size: 11px; margin: 3px 0;">${receiptHeader}</p>` : ""}
+          ${receiptFooter ? `<p style="font-size: 11px; margin: 3px 0;">${receiptFooter}</p>` : ""}
         </div>
         `
             : ""
@@ -512,19 +512,40 @@ const Cashier = () => {
             <style>
               @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
               @page { 
-                size: A4 landscape; 
-                margin: 15mm; 
+                size: 5.5in 8.5in; 
+                margin: 10mm; 
               }
               @media print {
                 body { 
                   margin: 0; 
-                  font-size: 12px; 
+                  font-size: 11px; 
                   font-family: 'HSD Display', 'DRAFT', 'Roman', 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
+                }
+                .invoice-container {
+                  max-width: none !important;
+                  width: 100% !important;
+                  padding: 8px !important;
+                }
+                .invoice-header {
+                  font-size: 24px !important;
+                }
+                .invoice-details {
+                  font-size: 12px !important;
+                }
+                .invoice-table th {
+                  font-size: 11px !important;
+                  padding: 6px !important;
+                }
+                .invoice-table td {
+                  font-size: 10px !important;
+                  padding: 6px !important;
                 }
               }
             </style>
           </head>
-          <body>${receiptContent}</body>
+          <body>
+            <div class="invoice-container">${receiptContent}</div>
+          </body>
         </html>
       `);
       printWindow.document.close();
